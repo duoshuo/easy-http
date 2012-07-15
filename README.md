@@ -5,7 +5,7 @@ EasyHttp是一个帮助你忽略不同的php环境情况，无差别地发送htt
 你不再需要关注当前php环境是否支持curl/fsockopen/fopen，EasyHttp会自动选择一个最合适的方式去发出http请求。
 EasyHttp源于WordPress中的WP_Http类，去除了所有对WordPress其他函数的依赖，将其拆分到不同的文件中，并做了少量简化。
 
-== DEMO ==
+= DEMO =
 require 'EasyHttp.php';
 require 'EasyHttp/Curl.php';
 require 'EasyHttp/Cookie.php';
@@ -33,9 +33,9 @@ $response = $http->request('http://localhost/', array(
 	));
 var_dump($response);
 
-== Contact ==
+= Contact =
 EasyHttp由多说网的沈振宇维护，如果你有什么疑问或者建议，欢迎写zhenyu (at) duoshuo.com，或者在新浪微博上私信@沈振宇。
 
-== Showcases ==
+= Showcases =
 * 多说评论系统 for DedeCMS插件
 * 多说评论系统 搬家程序
