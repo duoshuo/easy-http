@@ -6,16 +6,16 @@ EasyHttp是一个帮助你忽略不同的php环境情况，无差别地发送htt
 EasyHttp源于WordPress中的WP_Http类，去除了所有对WordPress其他函数的依赖，将其拆分到不同的文件中，并做了少量简化。
 
 ## DEMO
-require 'EasyHttp.php';
-require 'EasyHttp/Curl.php';
-require 'EasyHttp/Cookie.php';
-require 'EasyHttp/Encoding.php';
-require 'EasyHttp/Fsockopen.php';
-require 'EasyHttp/Proxy.php';
-require 'EasyHttp/Streams.php';
-
-$http = new EasyHttp();
-$response = $http->request('http://localhost/', array(
+    require 'EasyHttp.php';
+    require 'EasyHttp/Curl.php';
+    require 'EasyHttp/Cookie.php';
+    require 'EasyHttp/Encoding.php';
+    require 'EasyHttp/Fsockopen.php';
+    require 'EasyHttp/Proxy.php';
+    require 'EasyHttp/Streams.php';
+    
+    $http = new EasyHttp();
+    $response = $http->request('http://localhost/', array(
 		'method' => 'GET',		//	GET/POST
 		'timeout' => 5,			//	超时的秒数
 		'redirection' => 5,		//	最大重定向次数
@@ -31,7 +31,7 @@ $response = $http->request('http://localhost/', array(
 		'stream' => false,
 		'filename' => null		//	如果stream = true，则必须设定一个临时文件名
 	));
-var_dump($response);
+    var_dump($response);
 
 ## Contact
 EasyHttp由多说网的沈振宇维护，如果你有什么疑问或者建议，欢迎写zhenyu (at) duoshuo.com，或者在新浪微博上私信@沈振宇。
