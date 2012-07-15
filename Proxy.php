@@ -153,9 +153,7 @@ class EasyHttp_Proxy {
 		if ( $check === false )
 			return true;
 
-		$home = parse_url( EasyHttp::getOption('siteurl') );
-
-		if ( $check['host'] == 'localhost' || $check['host'] == $home['host'] )
+		if ( $check['host'] == 'localhost' || isset($_SERVER['HTTP_HOST']) && $check['host'] == $_SERVER['HTTP_HOST'] )
 			return false;
 
 		if ( !isset(self::$bypassHosts) )

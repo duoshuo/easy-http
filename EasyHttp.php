@@ -22,7 +22,7 @@ class EasyHttp {
 
 	const DEBUG		= false;
 	
-	public $version	= '0.1';
+	static $version	= '0.1';
 	static $blockExternal;
 	static $accessibleHosts;
 	
@@ -178,10 +178,8 @@ class EasyHttp {
 		$r['ssl'] = $arrURL['scheme'] == 'https' || $arrURL['scheme'] == 'ssl';
 
 		// Determine if this request is to OUR install of WordPress
-		$homeURL = parse_url( get_bloginfo( 'url' ) );
-		$r['local'] = $homeURL['host'] == $arrURL['host'] || 'localhost' == $arrURL['host'];
-		unset( $homeURL );
-
+		$r['local'] = isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == $arrURL['host'] || 'localhost' == $arrURL['host'];
+		
 		// If we are streaming to a file but no filename was given drop it in the WP temp dir
 		// and pick it's name using the basename of the $url
 		// 如果$r['stream'] 必须指定一个$r['filename']
@@ -257,7 +255,7 @@ class EasyHttp {
 
 		// Loop over each transport on each HTTP request looking for one which will serve this request's needs
 		foreach ( $request_order as $transport ) {
-			$class = 'EasyHttp_' . $transport;
+			$class = 'EasyHttp_' . ucfirst($transport);
 
 			// Check to see if this transport is a possibility, calls the transport statically
 			if ( !call_user_func( array( $class, 'test' ), $args, $url ) )
@@ -695,8 +693,12 @@ class EasyHttp {
 		return $value;
 	}
 	
-	static function getOption(){
-		//	bla bla bla...
-		// siteurl, charset
+	static function getOption($option){
+		switch($option){
+			case 'charset':
+				return 'utf-8';
+			default:
+				return null;
+		}
 	}
 }
