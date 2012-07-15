@@ -36,7 +36,7 @@ EasyHttp源于WordPress中的WP_Http类，去除了所有对WordPress其他函�
     var_dump($response);
 
 ## Contact
-EasyHttp由[多说网 http://duoshuo.com/]的沈振宇维护，如果你有什么疑问或者建议，欢迎写zhenyu (at) duoshuo.com，或者在新浪微博上私信@沈振宇。
+EasyHttp由[多说网](http://duoshuo.com/)的沈振宇维护，如果你有什么疑问或者建议，欢迎写zhenyu (at) duoshuo.com，或者在新浪微博上私信[@沈振宇](http://weibo.com/shenzhenyu)。
 
 ## Showcases
 * 多说评论系统 for DedeCMS插件
