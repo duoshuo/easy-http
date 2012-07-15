@@ -94,8 +94,9 @@ class EasyHttp_Fsockopen {
 		// If the delay is greater than the timeout then fsockopen shouldn't be used, because it will
 		// cause a long delay.
 		$elapseDelay = ($endDelay-$startDelay) > $r['timeout'];
-		if ( true === $elapseDelay )
-			add_option( 'disable_fsockopen', $endDelay, null, true );
+		//不支持这个自动disable的功能
+		//if ( true === $elapseDelay )
+		//	add_option( 'disable_fsockopen', $endDelay, null, true );
 
 		if ( false === $handle )
 			return new EasyHttp_Error('http_request_failed', $iError . ': ' . $strError);
@@ -134,7 +135,7 @@ class EasyHttp_Fsockopen {
 
 		$strHeaders .= "\r\n";
 
-		if ( ! is_null($r['body']) )
+		if ( $r['body'] !== null )
 			$strHeaders .= $r['body'];
 
 		fwrite($handle, $strHeaders);
@@ -219,8 +220,9 @@ class EasyHttp_Fsockopen {
 		if ( ! function_exists( 'fsockopen' ) )
 			return false;
 
-		if ( false !== ($option = EasyHttp::getOption( 'disable_fsockopen' )) && time()-$option < 43200 ) // 12 hours
-			return false;
+		//不支持这个自动disable的功能
+		//if ( false !== ($option = EasyHttp::getOption( 'disable_fsockopen' )) && time()-$option < 43200 ) // 12 hours
+		//	return false;
 
 		$is_ssl = isset( $args['ssl'] ) && $args['ssl'];
 

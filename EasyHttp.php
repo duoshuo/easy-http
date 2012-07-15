@@ -20,7 +20,7 @@
  */
 class EasyHttp {
 
-	const DEBUG		= true;
+	const DEBUG		= false;
 	
 	public $version	= '0.1';
 	static $blockExternal;
@@ -135,7 +135,7 @@ class EasyHttp {
 			'timeout' => EasyHttp::applyFilters( 'http_request_timeout', 5),
 			'redirection' => EasyHttp::applyFilters( 'http_request_redirection_count', 5),
 			'httpversion' => EasyHttp::applyFilters( 'http_request_version', '1.0'),
-			'user-agent' => EasyHttp::applyFilters( 'http_headers_useragent', 'WordPress/' . EasyHttp::$version . '; ' . get_bloginfo( 'url' )  ),
+			'user-agent' => EasyHttp::applyFilters( 'http_headers_useragent', 'EasyHttp/' . EasyHttp::$version . '; ' . EasyHttp::getOption( 'siteurl' )  ),
 			'blocking' => true,
 			'headers' => array(),
 			'cookies' => array(),
@@ -184,9 +184,10 @@ class EasyHttp {
 
 		// If we are streaming to a file but no filename was given drop it in the WP temp dir
 		// and pick it's name using the basename of the $url
-		if ( $r['stream']  && empty( $r['filename'] ) )
-			$r['filename'] = get_temp_dir() . basename( $url );
-
+		// 如果$r['stream'] 必须指定一个$r['filename']
+		//if ( $r['stream']  && empty( $r['filename'] ) )
+		//	$r['filename'] = get_temp_dir() . basename( $url );
+		
 		// Force some settings if we are streaming to a file and check for existence and perms of destination directory
 		if ( $r['stream'] ) {
 			$r['blocking'] = true;
@@ -194,7 +195,7 @@ class EasyHttp {
 				return new EasyHttp_Error( 'http_request_failed', __( 'Destination directory for file streaming does not exist or is not writable.' ) );
 		}
 
-		if ( is_null( $r['headers'] ) )
+		if ( $r['headers'] === null )
 			$r['headers'] = array();
 
 		if ( ! is_array( $r['headers'] ) ) {
@@ -690,8 +691,8 @@ class EasyHttp {
 		return $value;
 	}
 	
-	static function applyFilters(){
-		
+	static function applyFilters($name, $value){
+		return $value;
 	}
 	
 	static function getOption(){
